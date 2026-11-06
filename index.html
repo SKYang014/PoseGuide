@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14111a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="PoseGuide">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <title>PoseGuide</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- HOME -->
+<section id="home" class="screen active">
+  <header class="top">
+    <div>
+      <h1>PoseGuide</h1>
+      <p class="sub">Pick a pose, then hand him the phone.</p>
+    </div>
+    <button id="notesBtn" class="pill">💗 Her notes</button>
+  </header>
+
+  <h2 class="label">Where are you shooting?</h2>
+  <div id="settings" class="chips"></div>
+
+  <h2 class="label">Choose a pose</h2>
+  <div id="poseGrid" class="grid"></div>
+
+  <label class="refcard">
+    <input type="file" id="refInput" accept="image/*" hidden>
+    <span class="big">🖼️</span>
+    <span>
+      <b>Use my own example photo</b>
+      <small>Pick a pose photo you saved. He'll see it see-through on top of the camera to copy.</small>
+    </span>
+  </label>
+
+  <p class="foot">Photos stay on this phone. Nothing is uploaded.</p>
+</section>
+
+<!-- CAMERA -->
+<section id="camera" class="screen">
+  <video id="video" playsinline autoplay muted></video>
+  <div id="demo" hidden><span id="demoMsg"></span></div>
+  <div id="thirds" class="thirds"></div>
+  <div id="overlay"><div id="guide"></div></div>
+  <div id="flash"></div>
+
+  <div class="cam-top">
+    <button id="backBtn" class="icon" aria-label="Back">‹</button>
+    <div id="tip" class="tip">
+      <div class="tip-head"><span id="tipWho"></span><span id="tipCount"></span></div>
+      <p id="tipText"></p>
+      <button id="tipPrev" class="tip-nav prev" aria-label="Previous tip">‹</button>
+      <button id="tipNext" class="tip-nav next" aria-label="Next tip">›</button>
+    </div>
+    <div id="level" hidden><div class="lv-line"><i></i></div><span id="lvText"></span></div>
+    <div class="cam-tools">
+      <button id="mirrorBtn" class="icon" aria-label="Flip outline" title="Flip outline">⇋</button>
+      <button id="opacityBtn" class="icon" aria-label="Outline strength" title="Outline strength">◐</button>
+      <button id="gridBtn" class="icon" aria-label="Grid lines" title="Grid lines">#</button>
+      <button id="setupBtn" class="icon" aria-label="Instructions" title="Instructions">?</button>
+    </div>
+  </div>
+
+  <div class="cam-bottom">
+    <div class="shutter-row">
+      <button id="shotsBtn" class="thumb" aria-label="View photos"><span id="shotCount"></span></button>
+      <button id="shutter" aria-label="Take photo"><i></i></button>
+      <p class="hint">Drag &amp; pinch the<br>outline to fit her</p>
+    </div>
+  </div>
+
+  <div id="setup" class="sheet" aria-hidden="true">
+    <div class="sheet-inner" id="setupBody"></div>
+  </div>
+  <div id="toast" class="toast"></div>
+</section>
+
+<!-- REVIEW -->
+<section id="review" class="screen">
+  <header class="rv-top">
+    <button id="rvBack" class="icon dark" aria-label="Back to camera">‹</button>
+    <h2>This session</h2>
+    <button id="saveAll" class="pill">Save all</button>
+  </header>
+  <p class="rv-note">These photos disappear when you close the app, so save the good ones.</p>
+  <div id="shotList" class="shots"></div>
+</section>
+
+<!-- NOTES -->
+<dialog id="notesDlg">
+  <form method="dialog">
+    <h3>💗 Her notes</h3>
+    <p>Things he should always remember. One per line. These show up as tips on every pose.</p>
+    <textarea id="notesText" rows="7" placeholder="My left side is my good side&#10;Shoot close-ups from a little above&#10;Take at least 10 of every pose&#10;Check my hair isn't messy before you shoot"></textarea>
+    <div class="dlg-row">
+      <button value="cancel" class="pill">Cancel</button>
+      <button value="save" id="notesSave" class="primary small">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="poses.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
